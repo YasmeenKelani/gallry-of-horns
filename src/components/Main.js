@@ -1,28 +1,61 @@
 import React from "react";
 import HornedBeast from "./HornedBeast";
-import dataArray from "./data.json";
+import data from "./data.json";
 import Row from "react-bootstrap/Row";
+import SelectedBeast from "./SelectedBeast";
 
 class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+      showModal: false,
+      data: {},
+    };
+  }
+
+  showHandler = (title) => {
+    let element = data.find((item) => item.title === title);
+    this.setState({
+      showModal: true,
+      data: element,
+    });
+  };
+  closeHandler = () => {
+    this.setState({
+      showModal: false,
+    });
+  };
+
   render() {
     return (
       <div>
-        <Row xs={1} md={4} className="g-4">
-          {dataArray.map((data, index) => {
+        <Row xs={6} md={5} className="g-4">
+          {data.map((val, index) => {
             return (
-              <HornedBeast
-                key={index}
-                title={data.title}
-                img={data.image_url}
-                description={data.description}
-                keyWord={data.keyWord}
-                horns={data.horns}
-              />
+              <>
+                <HornedBeast
+                  showHandler={this.showHandler}
+                  key={index}
+                  title={val.title}
+                  img={val.image_url}
+                  description={val.description}
+                  keyWord={val.leyWord}
+                  horns={val.horns}
+                  handleShow={this.showHandler}
+                />
+              </>
             );
           })}
+          <SelectedBeast
+            showModal={this.state.showModal}
+            closeHandler={this.closeHandler}
+            data={this.state.data}
+          />
         </Row>
       </div>
     );
   }
 }
+
 export default Main;
