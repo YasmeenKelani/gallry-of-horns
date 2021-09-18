@@ -4,34 +4,56 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 
-class HornedBeast extends React.Component {
+class Hornedbeast extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clickNum: 0,
+      numOfclick: 0,
     };
   }
 
-  increaseclickNum = () => {
+  increasenumOfclick = () => {
     this.setState({
-      clickNum: this.state.clickNum + 1,
+      numOfclick: this.state.numOfclick + 1,
     });
   };
+
+  state = { isOpen: false };
+
+  handleShowDialog = () => {
+    // this.setState({ isOpen: !this.state.isOpen });
+    // console.log('cliked');
+    this.props.handleShow(this.props.title);
+  };
+
   render() {
     return (
       <div>
-        <Col>
-          <Card className="card" style={{ width: "18rem" }}>
-            <Card.Img className="cardi" variant="top" src={this.props.img} />
+        <Col style={{ width: "250px", height: "400px" }}>
+          <Card className="card">
+            <Card.Img
+              className="cardi"
+              variant="top"
+              src={this.props.img}
+              onClick={this.handleShowDialog}
+              style={{ width: "100%", height: "160px" }}
+              showModal={this.showModal}
+            />
+
             <Card.Body>
+              {this.state.isOpen && (
+                <dialog
+                // className='dialog'
+                // style={{ position: 'relative', margin: '150px'}}
+                // open
+                // onClick={this.handleShowDialog}
+                ></dialog>
+              )}
               <Card.Title>{this.props.title}</Card.Title>
-              <Card.Text>number of clicks {this.state.clickNum}</Card.Text>
-              <Button
-                className="cardB"
-                onClick={this.increaseclickNum}
-                variant="primary"
-              >
-                Vote{" "}
+              <Card.Text> number of clicks {this.state.numOfclick}</Card.Text>
+              <Card.Text> {this.props.description}</Card.Text>
+              <Button onClick={this.increasenumOfclick} variant="primary">
+                Vote
               </Button>
             </Card.Body>
           </Card>
@@ -40,4 +62,5 @@ class HornedBeast extends React.Component {
     );
   }
 }
-export default HornedBeast;
+
+export default Hornedbeast;
