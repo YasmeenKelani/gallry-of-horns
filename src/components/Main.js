@@ -1,10 +1,9 @@
-import React from 'react';
-import Hornedbeast from './Hornedbeast';
-import data from './data.json';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
-import SelectedBeast from './SelectedBeast';
-
+import React from "react";
+import Hornedbeast from "./Hornedbeast";
+import data from "./data.json";
+import Row from "react-bootstrap/Row";
+import Form from "react-bootstrap/Form";
+import SelectedBeast from "./SelectedBeast";
 
 class Main extends React.Component {
   constructor(props) {
@@ -13,7 +12,6 @@ class Main extends React.Component {
       isOpen: false,
       showModal: false,
       data: data,
-      data: {},
     };
   }
   showHandler = (title) => {
@@ -28,6 +26,7 @@ class Main extends React.Component {
       showModal: false,
     });
   };
+
   filteredImages = (horns) => {
     this.setState({
       data: horns,
@@ -43,41 +42,18 @@ class Main extends React.Component {
   };
   render() {
     return (
-      
       <div>
-        <Form.Select aria-label='Default select example' onChange={this.filter}>
+        <Form.Select aria-label="Default select example" onChange={this.filter}>
           <option>Open this select menu</option>
-          <option value=''>All</option>
-          <option value='1'>One</option>
-          <option value='2'>Two</option>
-          <option value='3'>Three</option>
-          <option value='100'>Wow</option>
+          <option value="">All</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="100">Wow</option>
         </Form.Select>
         <br />
-        <Row xs={6} md={5} className='g-4'>
+        <Row xs={6} md={5} className="g-4">
           {this.state.data.map((val, index) => {
-  showHandler = (title) => {
-    let element = data.find((item) => item.title === title);
-    this.setState({
-      showModal: true,
-      data: element,
-    });
-  };
-  closeHandler = () => {
-    this.setState({
-      showModal: false,
-    });
-  };
-
-  render(){
-
-    return (
-
-      </Row>
-
-      <div>
-        <Row xs={6} md={5} className='g-4'>
-          {data.map((val, index) => {
             return (
               <>
                 <Hornedbeast
@@ -87,7 +63,6 @@ class Main extends React.Component {
                   img={val.image_url}
                   description={val.description}
                   keyWord={val.keyWord}
-                  keyWord={val.leyWord}
                   horns={val.horns}
                   handleShow={this.showHandler}
                 />
